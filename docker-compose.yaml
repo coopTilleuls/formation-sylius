@@ -1,0 +1,87 @@
+version: "3.4"
+
+services:
+    php:
+        build:
+            context: .
+            target: symfony_php
+            args:
+                SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+                STABILITY: ${STABILITY:-stable}
+        restart: unless-stopped
+        volumes:
+            - php_socket:/var/run/php
+        depends_on:
+            - js
+            - db
+        healthcheck:
+            interval: 10s
+            timeout: 3s
+            retries: 3
+            start_period: 30s
+        environment:
+            # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
+            DATABASE_URL: ${DATABASE_URL}
+            # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
+            MERCURE_PUBLISH_URL: ${MERCURE_URL:-http://caddy/.well-known/mercure}
+            #SYMFONY_VERSION:
+
+    js:
+        image: 'node:14-slim'
+        working_dir: /srv/app
+        volumes:
+            - ./:/srv/app
+        command: docker/js/entrypoint.sh
+
+    db:
+        image: 'mysql:5.7'
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_USER: sylius
+            MYSQL_PASSWORD: sylius
+            MYSQL_DATABASE: sylius
+            MYSQL_ROOT_PASSWORD: sylius
+            MYSQL_RANDOM_ROOT_PASSWORD: ''            
+        volumes:
+            - './docker/mysql/data:/var/lib/mysql'
+
+    caddy:
+        build:
+            context: .
+            target: symfony_caddy
+        depends_on:
+            - php
+        environment:
+            SERVER_NAME: ${SERVER_NAME:-localhost, caddy:80}
+            MERCURE_PUBLISHER_JWT_KEY: ${MERCURE_PUBLISHER_JWT_KEY:-!ChangeMe!}
+            MERCURE_SUBSCRIBER_JWT_KEY: ${MERCURE_SUBSCRIBER_JWT_KEY:-!ChangeMe!}
+        restart: unless-stopped
+        volumes:
+            - php_socket:/var/run/php
+            - caddy_data:/data
+            - caddy_config:/config
+        ports:
+            # HTTP
+            -   target: 80
+                published: 80
+                protocol: tcp
+            # HTTPS
+            -   target: 443
+                published: 443
+                protocol: tcp
+            # HTTP/3
+            -   target: 443
+                published: 443
+                protocol: udp
+
+    mailcatcher:
+        image: 'zolweb/docker-mailcatcher:latest'
+        ports:
+            - '1080:1080'
+
+
+volumes:
+    php_socket:
+    caddy_data:
+    caddy_config:
