@@ -11,8 +11,6 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media
 
-	composer update
-
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-suggest --no-interaction
 		bin/console assets:install --no-interaction --symlink
