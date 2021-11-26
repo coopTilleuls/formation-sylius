@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="ui one column grid">
+        <div class="column">
+            <h1>{{ resource.title }}</h1>
+        </div>
+        <div class="column">
+            {{ resource.slug }}
+        </div>
+    </div>
+{% endblock %}

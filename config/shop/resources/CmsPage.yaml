@@ -1,0 +1,9 @@
+sylius_resource:
+    resources:
+        shop.cms_page:
+            driver: doctrine/orm
+            classes:
+                model: App\Entity\Cms\Page
+                repository: App\Repository\Admin\PageRepository
+            templates: '@SyliusShop/Cms/Page'
+                

@@ -13,7 +13,7 @@ class MenuListener
 
         $child->addChild('pages', [
             'label' => 'admin.menu.pages',
-            'route' => 'admin.cms.page_index',
+            'route' => 'admin_cms_page_index',
         ])->setLabelAttribute('icon', 'edit');
     }
 }
