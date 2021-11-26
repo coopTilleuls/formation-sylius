@@ -1,0 +1,4 @@
+admin:
+    menu:
+        cms: CMS
+        pages: Pages
