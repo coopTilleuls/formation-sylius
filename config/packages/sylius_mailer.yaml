@@ -1,0 +1,2 @@
+sylius_mailer:
+    sender_adapter: App\Mail\Adapter\MailerAdapter
