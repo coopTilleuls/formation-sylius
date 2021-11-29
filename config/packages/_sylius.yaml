@@ -9,6 +9,7 @@ imports:
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
+    sylius_api.enabled: true
 
 sylius_addressing:
     resources:

@@ -33,3 +33,6 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    # fix bug in sf4
+    #security.authentication_manager: '@security.authentication.manager'

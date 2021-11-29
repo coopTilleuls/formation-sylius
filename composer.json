@@ -70,7 +70,8 @@
         },
         "symfony": {
             "allow-contrib": false,
-            "docker": true
+            "docker": true,
+            "require": "5.3.*"
         }
     },
     "autoload": {
