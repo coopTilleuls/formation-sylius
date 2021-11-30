@@ -12,8 +12,8 @@
 /behat.yml
 /phpspec.yml
 
-/docker-compose.override.yaml
-/docker-compose.override.yml
+#/docker-compose.override.yaml
+#/docker-compose.override.yml
 /docker/mysql/data/
 
 ###> symfony/framework-bundle ###
