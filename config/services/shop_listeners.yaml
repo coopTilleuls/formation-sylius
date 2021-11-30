@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+    
+    App\Event\Listener\Shop\Order\CompleteListener:
+        tags:
+            - {name: kernel.event_listener, event: sylius.order.post_complete}

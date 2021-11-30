@@ -27,20 +27,25 @@ class AdditionalProductProcessor implements OrderProcessorInterface
 
     public function process(OrderInterface $order): void
     {
-        $tShirtCount = 0;
+        $hasTShirt = false;
+        $hasDress = false;
 
         /** @var OrderItem $orderItem */
         foreach ($order->getItems() as $orderItem) {
             $productTaxons = $orderItem->getProduct()->getProductTaxons();
 
             foreach ($productTaxons as $productTaxon) {
+                if ($productTaxon->getTaxon()->getCode() === 'dresses') {
+                    $hasDress = true;
+                }
+
                 if ($productTaxon->getTaxon()->getCode() === 't_shirts') {
-                    $tShirtCount++;
+                    $hasTShirt = true;
                 }
             }
         }
 
-        if ($tShirtCount > 0) {
+        if ($hasTShirt && !$hasDress) {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
             $dressTaxon = $this->taxonRepository->findOneBy(['code' => 'dresses']);
