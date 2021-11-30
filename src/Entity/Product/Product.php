@@ -12,9 +12,22 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
 #[ORM\Table(name: 'sylius_product')]
 class Product extends BaseProduct
 {
+    #[ORM\Column(type: 'string', nullable: true)]
+    private string $sku;
+
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
+    public function setSku(string $sku): void
+    {
+        $this->sku = $sku;
     }
 
     protected function createTranslation(): ProductTranslationInterface
