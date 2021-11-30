@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+    
+    App\Order\Processor\AdditionalProductProcessor:
+        arguments:
+            $cartItemFactory: '@sylius.factory.cart_item'
+        tags:
+            - {name: sylius.order_processor, priority: 255}
