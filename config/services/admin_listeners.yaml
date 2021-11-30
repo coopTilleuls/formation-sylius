@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    App\Event\Listener\Admin\Menu\MenuListener:
+        tags:
+            - {name: kernel.event_listener, event: sylius.menu.admin.main }

@@ -1,7 +1,8 @@
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+imports:
+    - { resource: 'services/*' }
+
 parameters:
-    locale: en_US
+    locale: fr_FR
 
 services:
     # Default configuration for services in *this* file
@@ -26,7 +27,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Entity,Event,Migrations,Tests,Kernel.php}'
 
     # Controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
