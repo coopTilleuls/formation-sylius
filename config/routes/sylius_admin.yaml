@@ -1,10 +1,20 @@
-sylius_admin:
-    resource: "@SyliusAdminBundle/Resources/config/routing.yml"
-    prefix: '/%sylius_admin.path_name%'
-
-sylius_paypal_admin:
-    resource: "@SyliusPayPalPlugin/Resources/config/admin_routing.yml"
-    prefix: '/%sylius_admin.path_name%'
+sylius_admin_locale:
+    resource: |
+        alias: sylius.locale
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        except: ['show']
+        redirect: index
+        grid: sylius_admin_locale
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_languages_available_in_the_store
+                templates:
+                    form: "@SyliusAdmin/Locale/_form.html.twig"
+            index:
+                icon: translate
+    type: sylius.resource
 
 admin_cms_page_resource:
     resource: |
@@ -21,3 +31,11 @@ admin_cms_page_resource:
                 icon: 'edit'
     type: sylius.resource
     prefix: /admin
+
+sylius_admin:
+    resource: "@SyliusAdminBundle/Resources/config/routing.yml"
+    prefix: '/%sylius_admin.path_name%'
+
+sylius_paypal_admin:
+    resource: "@SyliusPayPalPlugin/Resources/config/admin_routing.yml"
+    prefix: '/%sylius_admin.path_name%'
