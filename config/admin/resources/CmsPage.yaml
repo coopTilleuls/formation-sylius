@@ -1,0 +1,60 @@
+sylius_resource:
+    resources:
+        admin.cms_page:
+            driver: doctrine/orm
+            classes:
+                model: App\Entity\Cms\Page
+                repository: App\Repository\Admin\PageRepository
+                form: App\Form\Type\Admin\PageType
+
+sylius_grid:
+    grids:
+        admin_cms_page:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Cms\Page
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    label: Id
+                    sortable: ~
+                title:
+                    type: string
+                    label: Titre
+                    sortable: ~
+                status:
+                    type: string
+                    label: Statut
+                    sortable: ~
+                product:
+                    type: string
+                    label: Produit
+                    sortable: ~
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [title, content]
+                status:
+                    type: select
+                    form_options:
+                        choices:
+                            Publié: published
+                            En cours de validation: validation
+                product:
+                    type: entity
+                    form_options:
+                        class: App\Entity\Product\Product
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

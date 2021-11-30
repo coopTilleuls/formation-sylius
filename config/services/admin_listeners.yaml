@@ -6,3 +6,8 @@ services:
     App\Event\Listener\Admin\Menu\MenuListener:
         tags:
             - {name: kernel.event_listener, event: sylius.menu.admin.main }
+
+    App\Event\Listener\Admin\Cms\Page\PageUpdateListener:
+        tags:
+            - {name: kernel.event_listener, event: admin.cms_page.pre_create}
+            - {name: kernel.event_listener, event: admin.cms_page.pre_update}

@@ -5,3 +5,19 @@ sylius_admin:
 sylius_paypal_admin:
     resource: "@SyliusPayPalPlugin/Resources/config/admin_routing.yml"
     prefix: '/%sylius_admin.path_name%'
+
+admin_cms_page_resource:
+    resource: |
+        alias: admin.cms_page
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: admin_cms_page
+        vars:
+            all:
+                subheader: admin.cms.page.subheader
+                templates:
+                    form: '@SyliusAdmin/Cms/Page/_form.html.twig'
+            index:
+                icon: 'edit'
+    type: sylius.resource
+    prefix: /admin

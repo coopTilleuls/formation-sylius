@@ -13,6 +13,24 @@ sylius_shop_default_locale:
     defaults:
         _controller: sylius.controller.shop.locale_switch:switchAction
 
+shop_cms_page_resource:
+    resource: |
+        alias: shop.cms_page
+        grid: shop_cms_page        
+        only: ['show']
+    type: sylius.resource
+    prefix: /{_locale}/cms/
+
+shop_cms_page_show:
+    path: /{_locale}/cms/page/{slug}
+    controller: shop.controller.cms_page::showAction
+    defaults:
+        _sylius:
+            repository:
+                method: getBySlug
+                arguments: [ $slug ]
+    
+
 sylius_paypal:
     resource: "@SyliusPayPalPlugin/Resources/config/shop_routing.yaml"
     prefix: /{_locale}
