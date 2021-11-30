@@ -1,0 +1,24 @@
+services:
+    App\Payment\Factory\FakePaymentGatewayFactory:
+        arguments:
+            $captureAction: '@App\Payment\Action\CaptureAction'
+            $statusAction: '@App\Payment\Action\StatusAction'
+        tags:
+            - {name: payum.gateway_factory_builder, factory: app_fake_payment}
+
+    App\Payment\Form\Type\FakePaymentConfigurationType:
+        tags:
+            - {name: sylius.gateway_configuration_type, type: app_fake_payment, label: Fake Payment}
+            - {name: form.type}
+
+    App\Payment\Action\CaptureAction:
+        arguments:
+            $paymentRepository: '@sylius.repository.payment'
+        tags:
+            - {name: payum.action, factory: fake_payment, alias: payum.action.capture}
+
+    App\Payment\Action\StatusAction:
+        arguments:
+            $paymentRepository: '@sylius.repository.payment'
+        tags:
+            - {name: payum.action, factory: fake_payment, alias: payum.action.capture}
