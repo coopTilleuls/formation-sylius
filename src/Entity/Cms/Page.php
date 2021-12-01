@@ -4,6 +4,8 @@ namespace App\Entity\Cms;
 
 use App\Entity\Product\Product;
 use App\Repository\Admin\PageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +33,14 @@ class Page implements ResourceInterface
 
     #[ORM\Column(type: 'string')]
     private string $status;
+
+    #[ORM\ManyToMany(targetEntity: Block::class, inversedBy: 'pages')]
+    private Collection $blocks;
+
+    public function __construct()
+    {
+        $this->blocks = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -90,5 +100,20 @@ class Page implements ResourceInterface
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    public function getBlocks(): Collection
+    {
+        return $this->blocks;
+    }
+
+    public function setBlocks(Collection $blocks): void
+    {
+        $this->blocks = $blocks;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }

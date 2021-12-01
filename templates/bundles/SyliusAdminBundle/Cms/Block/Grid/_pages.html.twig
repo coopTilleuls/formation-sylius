@@ -1,0 +1,5 @@
+{% for page in data %}
+    <a href="{{ path('admin_cms_page_update', {id: page.id}) }}">
+        <span class="ui label">{{ page.title }}</span>
+    </a>
+{% endfor %}

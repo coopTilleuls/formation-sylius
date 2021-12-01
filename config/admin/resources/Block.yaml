@@ -1,0 +1,60 @@
+sylius_resource:
+    resources:
+        admin.cms_block:
+            driver: doctrine/orm
+            classes:
+                model: App\Entity\Cms\Block
+                form: App\Form\Type\Admin\BlockType
+
+sylius_grid:
+    grids:
+        admin_cms_block:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Cms\Block
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    label: Id
+                    sortable: ~
+                name:
+                    type: string
+                    label: Nom
+                    sortable: ~
+                enabled:
+                    type: string
+                    label: Activé ?
+                    sortable: ~
+                pages:
+                    type: twig
+                    label: Pages
+                    options:
+                        template: '@SyliusAdmin/Cms/Block/Grid/_pages.html.twig'
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [title]
+#                enabled:
+#                    type: select
+#                    form_options:
+#                        choices:
+#                            0: Désactivé
+#                            1: validation
+                pages:
+                    type: entity
+                    form_options:
+                        class: App\Entity\Cms\Page
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

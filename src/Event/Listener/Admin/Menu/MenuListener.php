@@ -15,5 +15,9 @@ class MenuListener
             'label' => 'admin.menu.pages',
             'route' => 'admin_cms_page_index',
         ])->setLabelAttribute('icon', 'edit');
+        $child->addChild('blocks', [
+            'label' => 'admin.menu.blocks',
+            'route' => 'admin_cms_block_index',
+        ]);
     }
 }
