@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="App\Entity\Cms\Page" shortName="CmsPage">
+        <attribute name="order">
+            <attribute name="id">DESC</attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/cms/pages</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:cms:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/cms/pages</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:cms:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/cms/pages/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:cms:read</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+<!--        <subresourceOperations>-->
+<!--            <subresourceOperation name="methods_get_subresource">-->
+<!--                <attribute name="method">GET</attribute>-->
+<!--                <attribute name="path">/shop/payments/{id}/methods</attribute>-->
+<!--                <attribute name="normalization_context">-->
+<!--                    <attribute name="groups">shop:payment:read</attribute>-->
+<!--                </attribute>-->
+<!--            </subresourceOperation>-->
+<!--        </subresourceOperations>-->
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="name" writable="false" />
+        <property name="slug" writable="false" />
+        <property name="content" writable="false" />
+        <property name="status" writable="false" />
+        <property name="blocks" writable="false" />
+<!--        <property name="enabled" writable="false" />-->
+<!--        <property name="method" writable="false">-->
+<!--            <subresource resourceClass="%sylius.model.payment_method.class%" />-->
+<!--        </property>-->
+    </resource>
+</resources>

@@ -1,0 +1,12 @@
+App\Entity\Cms\Block:
+    attributes:
+        id:
+            groups: ['admin:cms-page:read']
+        title:
+            groups: ['admin:cms-page:read']
+        enabled:
+            groups: ['admin:cms-page:read']
+        content:
+            groups: ['admin:cms-page:read']
+        type:
+            groups: ['admin:cms-page:read']

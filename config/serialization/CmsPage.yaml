@@ -1,0 +1,14 @@
+App\Entity\Cms\Page:
+    attributes:
+        id:
+            groups: ['admin:cms:read', 'shop:cms:read']
+        title:
+            groups: ['admin:cms:read', 'shop:cms:read']
+        slug:
+            groups: ['admin:cms:read', 'shop:cms:read']
+        status:
+            groups: [ 'admin:cms:read' ]
+        content:
+            groups: [ 'admin:cms:read', 'shop:cms:read']
+        blocks:
+            groups: [ 'admin:cms:read', 'shop:cms:read' ]
