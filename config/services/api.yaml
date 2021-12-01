@@ -1,0 +1,6 @@
+services:
+    App\Payment\StateMachine\TransitionApplicator:
+        decorates: sylius.api.payment_state_machine_transition_applicator
+        arguments: 
+            $decorated: '@.inner'
+            $stateMachineFactory: '@sm.factory'
